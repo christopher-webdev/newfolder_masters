@@ -1,0 +1,934 @@
+[
+  [
+    {
+      "plan": {
+        "gsghghhgs": {
+          "name": "free",
+          "data": [
+            {
+              "id": "_n1uowcouq",
+              "name": "Price & Credits",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_3mnkmnuj2",
+              "name": "Price & Credits",
+              "subOption": "Instant Avatar",
+              "value": "Paid Add-On"
+            },
+            {
+              "id": "_05crdfdzw4",
+              "name": "Price & Credits",
+              "subOption": "Unit Price",
+              "value": "Free"
+            },
+            {
+              "id": "_5u3y5to5y",
+              "name": "Price & Credits",
+              "subOption": "Credit Plans",
+              "value": "1 Credit"
+            },
+            {
+              "id": "_qemjvf2bk",
+              "name": "Price & Credits",
+              "subOption": "Switch/Cancel Anytime",
+              "value": "check"
+            },
+            {
+              "id": "_o76pec45x",
+              "name": "Avatars",
+              "subOption": "Public Avatars",
+              "value": "Free"
+            },
+            {
+              "id": "_6dvbh91bz",
+              "name": "Avatars",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_xsc38ogln",
+              "name": "Avatars",
+              "subOption": "Instant Avatar",
+              "value": "Paid Add-On"
+            },
+            {
+              "id": "_746c8wbpp",
+              "name": "Avatars",
+              "subOption": "Studio Avatar",
+              "value": "uncheck"
+            },
+            {
+              "id": "_xrg2hpuch",
+              "name": "All Features",
+              "subOption": "Avatar FaceSwap",
+              "value": "check"
+            },
+            {
+              "id": "_47jz3u4ap",
+              "name": "All Features",
+              "subOption": "Photo Avatar Generation",
+              "value": "check"
+            },
+            {
+              "id": "_7ai0oepe1",
+              "name": "All Features",
+              "subOption": "Text2Image",
+              "value": "check"
+            },
+            {
+              "id": "_cyg3ialig",
+              "name": "All Features",
+              "subOption": "GPT4 Script Writer",
+              "value": "check"
+            },
+            {
+              "id": "_yfvavg6rb",
+              "name": "All Features",
+              "subOption": "AI Matting",
+              "value": "check"
+            },
+            {
+              "id": "_jfur82njb",
+              "name": "All Features",
+              "subOption": "URL To Video",
+              "value": "check"
+            },
+            {
+              "id": "_p5f88pl85",
+              "name": "Team Collaboration",
+              "subOption": "Space Seats",
+              "value": "2 Seats"
+            },
+            {
+              "id": "_wqmoedrw0",
+              "name": "Team Collaboration",
+              "subOption": "Credit Control",
+              "value": "uncheck"
+            },
+            {
+              "id": "_oxj0bqi59",
+              "name": "Team Collaboration",
+              "subOption": "Role Control",
+              "value": "uncheck"
+            },
+            {
+              "id": "_6m5s0o48m",
+              "name": "Team Collaboration",
+              "subOption": "Usage Report",
+              "value": "uncheck"
+            },
+            {
+              "id": "_oszocgw16",
+              "name": "Team Collaboration",
+              "subOption": "Brand Kit",
+              "value": "uncheck"
+            },
+            {
+              "id": "_mkstxzh1x",
+              "name": "Team Collaboration",
+              "subOption": "Access Control",
+              "value": "uncheck"
+            },
+            {
+              "id": "_dqdqjg09u",
+              "name": "Price & Credits",
+              "subOption": "SSO",
+              "value": "uncheck"
+            },
+            {
+              "id": "_9lhb3pjsc",
+              "name": "Video Creation",
+              "subOption": "Audio Input",
+              "value": "uncheck"
+            },
+            {
+              "id": "_0n6qpw970",
+              "name": "Video Creation",
+              "subOption": "Video Duration",
+              "value": "1-Min Max Duration\t"
+            },
+            {
+              "id": "_ytmg000cn",
+              "name": "Video Creation",
+              "subOption": "Video Templates",
+              "value": "400+"
+            },
+            {
+              "id": "_vlym7fgfd",
+              "name": "Video Creation",
+              "subOption": "Stock Elements",
+              "value": "uncheck"
+            },
+            {
+              "id": "_ysv6iwi5a",
+              "name": "Video Creation",
+              "subOption": "Audio Recording",
+              "value": "uncheck"
+            },
+            {
+              "id": "_cbf8m4gwi",
+              "name": "Video Creation",
+              "subOption": "Import PPT/PDF",
+              "value": "uncheck"
+            },
+            {
+              "id": "_avtkbl22h",
+              "name": "Video Creation",
+              "subOption": "Image/Video Background",
+              "value": "uncheck"
+            },
+            {
+              "id": "_7c08cbm1b",
+              "name": "Video Creation",
+              "subOption": "Background Music",
+              "value": "uncheck"
+            },
+            {
+              "id": "_x24l5nz9m",
+              "name": "Video Creation",
+              "subOption": "Stock Library",
+              "value": "uncheck"
+            },
+            {
+              "id": "_16j7c9ds4",
+              "name": "Video Creation",
+              "subOption": "Video Animation",
+              "value": "uncheck"
+            },
+            {
+              "id": "_yn29a7fch",
+              "name": "Video Creation",
+              "subOption": "1080P Export",
+              "value": "uncheck"
+            },
+            {
+              "id": "_j6q9y7smj",
+              "name": "Video Creation",
+              "subOption": "Priority Process",
+              "value": "uncheck"
+            },
+            {
+              "id": "_83qaz6zqb",
+              "name": "Price & Credits",
+              "subOption": "API Integration",
+              "value": "uncheck"
+            },
+            {
+              "id": "_caymgx61n",
+              "name": "Price & Credits",
+              "subOption": "4K Export",
+              "value": "uncheck"
+            },
+            {
+              "id": "_4lhfcqu57",
+              "name": "Video Creation",
+              "subOption": "Auto Captions",
+              "value": "uncheck"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  [
+    {
+      "plan": {
+        "j03y7toyf3h": {
+          "name": "creator",
+          "data": [
+            {
+              "id": "_n1uowcoufgq",
+              "name": "Price & Credits",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_3mnkmnuj2gf",
+              "name": "Price & Credits",
+              "subOption": "Instant Avatar",
+              "value": "Paid Add-On"
+            },
+            {
+              "id": "_05crdfdwez4sd",
+              "name": "Price & Credits",
+              "subOption": "Unit Price",
+              "value": "$2 / Credit Monthly"
+            },
+            {
+              "id": "_5u3y5to5yds",
+              "name": "Price & Credits",
+              "subOption": "Credit Plans",
+              "value": "15, 30, 60, 90, 120 / Month"
+            },
+            {
+              "id": "_qemjvf2bdsk",
+              "name": "Price & Credits",
+              "subOption": "Switch/Cancel Anytime",
+              "value": "check"
+            },
+            {
+              "id": "_o76pec45xd",
+              "name": "Avatars",
+              "subOption": "Public Avatars",
+              "value": "100+ Premium Avatars"
+            },
+            {
+              "id": "_6dvbh91bzs",
+              "name": "Avatars",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_xsc38oglns",
+              "name": "Avatars",
+              "subOption": "Instant Avatar",
+              "value": "Paid Add-On"
+            },
+            {
+              "id": "_746c8wbpsp",
+              "name": "Avatars",
+              "subOption": "Studio Avatar",
+              "value": "uncheck"
+            },
+            {
+              "id": "_xrg2hpusch",
+              "name": "All Features",
+              "subOption": "Avatar FaceSwap",
+              "value": "check"
+            },
+            {
+              "id": "_47jz3us4ap",
+              "name": "All Features",
+              "subOption": "Photo Avatar Generation",
+              "value": "check"
+            },
+            {
+              "id": "_7ai0osepe1",
+              "name": "All Features",
+              "subOption": "Text2Image",
+              "value": "check"
+            },
+            {
+              "id": "_cyg3sialig",
+              "name": "All Features",
+              "subOption": "GPT4 Script Writer",
+              "value": "check"
+            },
+            {
+              "id": "_yfvsavg6rb",
+              "name": "All Features",
+              "subOption": "AI Matting",
+              "value": "check"
+            },
+            {
+              "id": "_jfsur82njb",
+              "name": "All Features",
+              "subOption": "URL To Video",
+              "value": "check"
+            },
+            {
+              "id": "_ps5f88pl85",
+              "name": "Team Collaboration",
+              "subOption": "Space Seats",
+              "value": "3 Seats"
+            },
+            {
+              "id": "_swqmoedrw0",
+              "name": "Team Collaboration",
+              "subOption": "Credit Control",
+              "value": "uncheck"
+            },
+            {
+              "id": "_oxj0bqi59s",
+              "name": "Team Collaboration",
+              "subOption": "Role Control",
+              "value": "uncheck"
+            },
+            {
+              "id": "_6m5s0o48ms",
+              "name": "Team Collaboration",
+              "subOption": "Usage Report",
+              "value": "uncheck"
+            },
+            {
+              "id": "_oszocgw16s",
+              "name": "Team Collaboration",
+              "subOption": "Brand Kit",
+              "value": "uncheck"
+            },
+            {
+              "id": "_mkstxzh1xs",
+              "name": "Team Collaboration",
+              "subOption": "Access Control",
+              "value": "uncheck"
+            },
+            {
+              "id": "_dqdqjg09su",
+              "name": "Price & Credits",
+              "subOption": "SSO",
+              "value": "uncheck"
+            },
+            {
+              "id": "_9lhb3pjssc",
+              "name": "Video Creation",
+              "subOption": "Audio Input",
+              "value": "uncheck"
+            },
+            {
+              "id": "_0n6qpw9s70",
+              "name": "Video Creation",
+              "subOption": "Video Duration",
+              "value": "5-Min Max Duration\t"
+            },
+            {
+              "id": "_ytmg00s0cn",
+              "name": "Video Creation",
+              "subOption": "Video Templates",
+              "value": "400+"
+            },
+            {
+              "id": "_vlym7fgsfd",
+              "name": "Video Creation",
+              "subOption": "Stock Elements",
+              "value": "uncheck"
+            },
+            {
+              "id": "_ysv6iwi5as",
+              "name": "Video Creation",
+              "subOption": "Audio Recording",
+              "value": "uncheck"
+            },
+            {
+              "id": "_cbf8m4gwis",
+              "name": "Video Creation",
+              "subOption": "Import PPT/PDF",
+              "value": "uncheck"
+            },
+            {
+              "id": "_avtkbl22sh",
+              "name": "Video Creation",
+              "subOption": "Image/Video Background",
+              "value": "uncheck"
+            },
+            {
+              "id": "_7c08cbms1b",
+              "name": "Video Creation",
+              "subOption": "Background Music",
+              "value": "uncheck"
+            },
+            {
+              "id": "_x24l5nsz9m",
+              "name": "Video Creation",
+              "subOption": "Stock Library",
+              "value": "uncheck"
+            },
+            {
+              "id": "_16j7cs9ds4",
+              "name": "Video Creation",
+              "subOption": "Video Animation",
+              "value": "uncheck"
+            },
+            {
+              "id": "_yn29sa7fch",
+              "name": "Video Creation",
+              "subOption": "1080P Export",
+              "value": "uncheck"
+            },
+            {
+              "id": "_j6q9y7smsj",
+              "name": "Video Creation",
+              "subOption": "Priority Process",
+              "value": "uncheck"
+            },
+            {
+              "id": "_83qaz6zsqb",
+              "name": "Price & Credits",
+              "subOption": "API Integration",
+              "value": "uncheck"
+            },
+            {
+              "id": "_caymgxs61n",
+              "name": "Price & Credits",
+              "subOption": "4K Export",
+              "value": "uncheck"
+            },
+            {
+              "id": "_4lhfcsqu57",
+              "name": "Video Creation",
+              "subOption": "Auto Captions",
+              "value": "uncheck"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  [
+    {
+      "plan": {
+        "j03tty7oyffd3": {
+          "name": "Business",
+          "data": [
+            {
+              "id": "_n1uowcouqf",
+              "name": "Price & Credits",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_3mnkmnuj2f",
+              "name": "Price & Credits",
+              "subOption": "Instant Avatar",
+              "value": "Paid Add-On"
+            },
+            {
+              "id": "_05crdfdz4f",
+              "name": "Price & Credits",
+              "subOption": "Unit Price",
+              "value": "$3 / Credit Monthly"
+            },
+            {
+              "id": "_5u3y5to5fy",
+              "name": "Price & Credits",
+              "subOption": "Credit Plans",
+              "value": "30, 60, 120, 180, 300 / Month"
+            },
+            {
+              "id": "_qemjvf2fbk",
+              "name": "Price & Credits",
+              "subOption": "Switch/Cancel Anytime",
+              "value": "check"
+            },
+            {
+              "id": "_o76pefc45x",
+              "name": "Avatars",
+              "subOption": "Public Avatars",
+              "value": "100+ Premium Avatars"
+            },
+            {
+              "id": "_6dvbfh91bz",
+              "name": "Avatars",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_xscf38ogln",
+              "name": "Avatars",
+              "subOption": "Instant Avatar",
+              "value": "Paid Add-On"
+            },
+            {
+              "id": "_74f6c8wbpp",
+              "name": "Avatars",
+              "subOption": "Studio Avatar",
+              "value": "uncheck"
+            },
+            {
+              "id": "_xfrg2hpuch",
+              "name": "All Features",
+              "subOption": "Avatar FaceSwap",
+              "value": "check"
+            },
+            {
+              "id": "_f47jz3u4ap",
+              "name": "All Features",
+              "subOption": "Photo Avatar Generation",
+              "value": "check"
+            },
+            {
+              "id": "_7ai0oepe1f",
+              "name": "All Features",
+              "subOption": "Text2Image",
+              "value": "check"
+            },
+            {
+              "id": "_cyg3ialigf",
+              "name": "All Features",
+              "subOption": "GPT4 Script Writer",
+              "value": "check"
+            },
+            {
+              "id": "_yfvavg6rbf",
+              "name": "All Features",
+              "subOption": "AI Matting",
+              "value": "check"
+            },
+            {
+              "id": "_jfur82njbf",
+              "name": "All Features",
+              "subOption": "URL To Video",
+              "value": "check"
+            },
+            {
+              "id": "_p5f88pl85f",
+              "name": "Team Collaboration",
+              "subOption": "Space Seats",
+              "value": "5 Seats"
+            },
+            {
+              "id": "_wqmoedrw0f",
+              "name": "Team Collaboration",
+              "subOption": "Credit Control",
+              "value": "check"
+            },
+            {
+              "id": "_oxj0bqi59f",
+              "name": "Team Collaboration",
+              "subOption": "Role Control",
+              "value": "check"
+            },
+            {
+              "id": "_6m5s0o48mf",
+              "name": "Team Collaboration",
+              "subOption": "Usage Report",
+              "value": "check"
+            },
+            {
+              "id": "_oszocgw16f",
+              "name": "Team Collaboration",
+              "subOption": "Brand Kit",
+              "value": "check"
+            },
+            {
+              "id": "_mkstxzh1xf",
+              "name": "Team Collaboration",
+              "subOption": "Access Control",
+              "value": "check"
+            },
+            {
+              "id": "_dqdqjg09uf",
+              "name": "Price & Credits",
+              "subOption": "SSO",
+              "value": "uncheck"
+            },
+            {
+              "id": "_9lhb3pjscf",
+              "name": "Video Creation",
+              "subOption": "Audio Input",
+              "value": "check"
+            },
+            {
+              "id": "_0n6qpw970f",
+              "name": "Video Creation",
+              "subOption": "Video Duration",
+              "value": "20-Min Max Duration\t"
+            },
+            {
+              "id": "_ytmg000cnf",
+              "name": "Video Creation",
+              "subOption": "Video Templates",
+              "value": "400+"
+            },
+            {
+              "id": "_vlym7fgfdf",
+              "name": "Video Creation",
+              "subOption": "Stock Elements",
+              "value": "check"
+            },
+            {
+              "id": "_ysv6iwi5fa",
+              "name": "Video Creation",
+              "subOption": "Audio Recording",
+              "value": "check"
+            },
+            {
+              "id": "_cbf8m4gfwi",
+              "name": "Video Creation",
+              "subOption": "Import PPT/PDF",
+              "value": "check"
+            },
+            {
+              "id": "_avtkblf22h",
+              "name": "Video Creation",
+              "subOption": "Image/Video Background",
+              "value": "check"
+            },
+            {
+              "id": "_7c08cfbm1b",
+              "name": "Video Creation",
+              "subOption": "Background Music",
+              "value": "check"
+            },
+            {
+              "id": "_x24lf5nz9m",
+              "name": "Video Creation",
+              "subOption": "Stock Library",
+              "value": "check"
+            },
+            {
+              "id": "_16jf7c9ds4",
+              "name": "Video Creation",
+              "subOption": "Video Animation",
+              "value": "check"
+            },
+            {
+              "id": "_ynf29a7fch",
+              "name": "Video Creation",
+              "subOption": "1080P Export",
+              "value": "check"
+            },
+            {
+              "id": "_j6q9y7smfj",
+              "name": "Video Creation",
+              "subOption": "Priority Process",
+              "value": "check"
+            },
+            {
+              "id": "_83qaz6zfqb",
+              "name": "Price & Credits",
+              "subOption": "API Integration",
+              "value": "check"
+            },
+            {
+              "id": "_caymgxv61n",
+              "name": "Price & Credits",
+              "subOption": "4K Export",
+              "value": "check"
+            },
+            {
+              "id": "_4lhfcvqu57",
+              "name": "Video Creation",
+              "subOption": "Auto Captions",
+              "value": "check"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  [
+    {
+      "plan": {
+        "j03y7oyf3": {
+          "name": "Enterprise",
+          "data": [
+            {
+              "id": "_n1uoxwcouq",
+              "name": "Price & Credits",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_3mnxhkmnuj2",
+              "name": "Price & Credits",
+              "subOption": "Instant Avatar",
+              "value": "Customizable"
+            },
+            {
+              "id": "_05xcjrdfwdz4",
+              "name": "Price & Credits",
+              "subOption": "Unit Price",
+              "value": "Customizable"
+            },
+            {
+              "id": "_5u3y5tho5xy",
+              "name": "Price & Credits",
+              "subOption": "Credit Plans",
+              "value": "Customizable"
+            },
+            {
+              "id": "_qemjvf2bxk",
+              "name": "Price & Credits",
+              "subOption": "Switch/Cancel Anytime",
+              "value": "Customizable"
+            },
+            {
+              "id": "_o76pec45xx",
+              "name": "Avatars",
+              "subOption": "Public Avatars",
+              "value": "100+ Premium Avatars"
+            },
+            {
+              "id": "_6dvbh91bxz",
+              "name": "Avatars",
+              "subOption": "Photo Avatar",
+              "value": "Unlimited"
+            },
+            {
+              "id": "_xsc38ogjlxn",
+              "name": "Avatars",
+              "subOption": "Instant Avatar",
+              "value": "Customizable"
+            },
+            {
+              "id": "_746c8wbxpp",
+              "name": "Avatars",
+              "subOption": "Studio Avatar",
+              "value": "check"
+            },
+            {
+              "id": "_xrg2hpucxh",
+              "name": "All Features",
+              "subOption": "Avatar FaceSwap",
+              "value": "check"
+            },
+            {
+              "id": "_47jz3u4xap",
+              "name": "All Features",
+              "subOption": "Photo Avatar Generation",
+              "value": "check"
+            },
+            {
+              "id": "_7ai0oexpe1",
+              "name": "All Features",
+              "subOption": "Text2Image",
+              "value": "check"
+            },
+            {
+              "id": "_cyg3ixalig",
+              "name": "All Features",
+              "subOption": "GPT4 Script Writer",
+              "value": "check"
+            },
+            {
+              "id": "_yfvaxvg6rb",
+              "name": "All Features",
+              "subOption": "AI Matting",
+              "value": "check"
+            },
+            {
+              "id": "_jfur82njxb",
+              "name": "All Features",
+              "subOption": "URL To Video",
+              "value": "check"
+            },
+            {
+              "id": "_p5f88phlx85",
+              "name": "Team Collaboration",
+              "subOption": "Space Seats",
+              "value": "Customizable"
+            },
+            {
+              "id": "_wqmoeggdxrw0",
+              "name": "Team Collaboration",
+              "subOption": "Credit Control",
+              "value": "check"
+            },
+            {
+              "id": "_oxj0bxqi59",
+              "name": "Team Collaboration",
+              "subOption": "Role Control",
+              "value": "check"
+            },
+            {
+              "id": "_6m5sx0o48m",
+              "name": "Team Collaboration",
+              "subOption": "Usage Report",
+              "value": "check"
+            },
+            {
+              "id": "_oszxocgw16",
+              "name": "Team Collaboration",
+              "subOption": "Brand Kit",
+              "value": "check"
+            },
+            {
+              "id": "_mkxstxzh1x",
+              "name": "Team Collaboration",
+              "subOption": "Access Control",
+              "value": "check"
+            },
+            {
+              "id": "_dxqdqjg09u",
+              "name": "Price & Credits",
+              "subOption": "SSO",
+              "value": "uncheck"
+            },
+            {
+              "id": "_x9lhb3pjsc",
+              "name": "Video Creation",
+              "subOption": "Audio Input",
+              "value": "check"
+            },
+            {
+              "id": "_0n6qpw970x",
+              "name": "Video Creation",
+              "subOption": "Video Duration",
+              "value": "60-Min Max Duration\t"
+            },
+            {
+              "id": "_ytmg000cnx",
+              "name": "Video Creation",
+              "subOption": "Video Templates",
+              "value": "400+"
+            },
+            {
+              "id": "_vlym7fgfxd",
+              "name": "Video Creation",
+              "subOption": "Stock Elements",
+              "value": "check"
+            },
+            {
+              "id": "_ysv6iwix5a",
+              "name": "Video Creation",
+              "subOption": "Audio Recording",
+              "value": "check"
+            },
+            {
+              "id": "_cbf8m4xgwi",
+              "name": "Video Creation",
+              "subOption": "Import PPT/PDF",
+              "value": "check"
+            },
+            {
+              "id": "_avtkbxl22h",
+              "name": "Video Creation",
+              "subOption": "Image/Video Background",
+              "value": "check"
+            },
+            {
+              "id": "_7c08xcbm1b",
+              "name": "Video Creation",
+              "subOption": "Background Music",
+              "value": "check"
+            },
+            {
+              "id": "_x24xl5nz9m",
+              "name": "Video Creation",
+              "subOption": "Stock Library",
+              "value": "check"
+            },
+            {
+              "id": "_16xj7c9ds4",
+              "name": "Video Creation",
+              "subOption": "Video Animation",
+              "value": "check"
+            },
+            {
+              "id": "_yxn29a7fch",
+              "name": "Video Creation",
+              "subOption": "1080P Export",
+              "value": "check"
+            },
+            {
+              "id": "_j6q9y7smxj",
+              "name": "Video Creation",
+              "subOption": "Priority Process",
+              "value": "check"
+            },
+            {
+              "id": "_83qaz6zxqb",
+              "name": "Price & Credits",
+              "subOption": "API Integration",
+              "value": "check"
+            },
+            {
+              "id": "_caymgxx61n",
+              "name": "Price & Credits",
+              "subOption": "4K Export",
+              "value": "check"
+            },
+            {
+              "id": "_4lhfcxqu57",
+              "name": "Video Creation",
+              "subOption": "Auto Captions",
+              "value": "check"
+            }
+          ]
+        }
+      }
+    }
+  ]
+]

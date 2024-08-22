@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Dashboard</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+
+        <style>
+            .dot {
+                transition: transform 0.2s ease-in-out;
+            }
+            input:checked + .block {
+                background-color: #4caf50;
+            }
+            input:checked + .block .dot {
+                transform: translateX(100%);
+            }
+        </style>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body class="bg-gray-100">
+        <div class="flex">
+            <!-- Sidebar -->
+            <div class="w-64 h-screen bg-gray-800 text-white">
+                <div class="p-4 text-2xl font-semibold">Admin Dashboard</div>
+                <ul class="mt-8">
+                    <li
+                        class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                        id="manageAdminBtn"
+                    >
+                        Manage Admin
+                    </li>
+                    <ul class="ml-4 mt-2 hidden" id="allAdminFunctions">
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            id="registerAdmin"
+                        >
+                            Register Admin
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            id="changeAdminPasswordSectionBtn"
+                        >
+                            Change Admin Password
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            id="adminListBtn"
+                        >
+                            Admin List
+                        </li>
+                    </ul>
+                    <li
+                        class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                        id="manageUsersBtn"
+                    >
+                        Manage Users
+                    </li>
+
+                    <li
+                        class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                        id="toggleVisability"
+                    >
+                        DashBoard AI Availability Toggler
+                    </li>
+
+                    <li
+                        class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                        id="manageSubmitsAndPricing"
+                    >
+                        Manage Credits Settings
+                    </li>
+
+                    <li
+                        class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                        id="manageProjectsBtn"
+                    >
+                        Manage Projects
+                    </li>
+                    <ul class="ml-4 mt-2 hidden" id="manageProjectslinkBtn">
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category=""
+                        >
+                            All Projects
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category="Video Editor AI"
+                        >
+                            Video Editor
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category="Video Restyling AI"
+                        >
+                            Video Restyle
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category="Video Voicing"
+                        >
+                            Video Voicing
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category="Lip Sync AI"
+                        >
+                            Lip Sync
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category="Face Swap AI"
+                        >
+                            Face Swap
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category="3D Video Modeling AI"
+                        >
+                            3D Video Modeling
+                        </li>
+                        <li
+                            class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                            data-category="Add Avatar"
+                        >
+                            My Avatar
+                        </li>
+                    </ul>
+                    <li
+                        class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
+                        id="manageAvatarBtn"
+                    >
+                        Manage Avatar
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1 p-6">
+                <!-- Manage Admin Section -->
+                <div
+                    id="manageAdminSection"
+                    class="hidden flex justify-center items-center min-h-screen bg-gray-100"
+                >
+                    <div
+                        class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+                    >
+                        <h2
+                            class="text-3xl font-semibold text-gray-700 mb-6 text-center"
+                        >
+                            Create Admin
+                        </h2>
+                        <p class="text-center text-gray-600 mb-4">
+                            Create Admin SuperUser or Admin
+                        </p>
+                        <form id="admin-register-form" class="space-y-6">
+                            <div>
+                                <label
+                                    for="email"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Email:</label
+                                >
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="password"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Password:</label
+                                >
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    required
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                />
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    id="isSuperuser"
+                                    name="isSuperuser"
+                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                />
+                                <label
+                                    for="isSuperuser"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Is Superuser</label
+                                >
+                            </div>
+                            <button
+                                type="submit"
+                                class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                            >
+                                Register
+                            </button>
+                            <div
+                                id="message"
+                                class="text-center mt-4 text-gray-600"
+                            ></div>
+                        </form>
+                    </div>
+                </div>
+                <div
+                    id="changeAdminPasswordSection"
+                    class="hidden flex justify-center items-center min-h-screen bg-gray-100"
+                >
+                    <div
+                        class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+                    >
+                        <h2
+                            class="text-3xl font-semibold text-gray-700 mb-6 text-center"
+                        >
+                            Change Admin Password
+                        </h2>
+                        <form id="admin-password-form" class="space-y-6">
+                            <div>
+                                <label
+                                    for="email"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Email:</label
+                                >
+                                <input
+                                    type="email"
+                                    id="chemail"
+                                    name="email"
+                                    required
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="password"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >New Password:</label
+                                >
+                                <input
+                                    type="password"
+                                    id="chpassword"
+                                    name="password"
+                                    required
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                            >
+                                Change Password
+                            </button>
+                            <div
+                                id="changePasswordMessage"
+                                class="text-center mt-4 text-gray-600"
+                            ></div>
+                        </form>
+                    </div>
+                </div>
+                <section
+                    id="adminListSection"
+                    class="container mx-auto my-8 p-6 bg-white shadow-md rounded-lg"
+                >
+                    <h2 class="text-2xl font-semibold mb-6 text-gray-700">
+                        Admin List
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table
+                            id="adminTable"
+                            class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm"
+                        >
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th
+                                        class="py-3 px-6 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                                    >
+                                        Admin ID
+                                    </th>
+                                    <th
+                                        class="py-3 px-6 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                                    >
+                                        Email
+                                    </th>
+                                    <th
+                                        class="py-3 px-6 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                                    >
+                                        Is Super User
+                                    </th>
+                                    <th
+                                        class="py-3 px-6 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                                    >
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Admins will be listed here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <!-- /////////////////////////////////////// Start of Manage Users ////////////////////////// -->
+                <!-- Manage Users Section -->
+                <div id="manageUsersSection" class="hidden">
+                    <h2 class="text-3xl font-semibold text-gray-700 mb-6">
+                        Manage Users
+                    </h2>
+                    <div class="mb-4">
+                        <input
+                            type="text"
+                            id="searchInput"
+                            class="p-2 border border-gray-300 rounded-md w-full md:w-1/2 lg:w-1/3"
+                            placeholder="Search users by name, email, user id..."
+                        />
+                    </div>
+
+                    <br /><br />
+
+                    <div class="overflow-x-auto shadow-md rounded-lg">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="py-2 px-4">#</th>
+                                    <th class="py-2 px-4">User id</th>
+                                    <th class="py-2 px-4">Name</th>
+                                    <th class="py-2 px-4">Email</th>
+                                    <th class="py-2 px-4">Phone Number</th>
+                                    <th class="py-2 px-4">Address</th>
+                                    <th class="py-2 px-4">Subscription Plan</th>
+                                    <th class="py-2 px-4">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                <!-- User rows will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                        <!-- Modal Structure -->
+                        <div
+                            id="subscriptionModal"
+                            class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden"
+                        >
+                            <div
+                                class="bg-white p-6 rounded-lg shadow-lg w-1/3"
+                            >
+                                <h2 class="text-2xl mb-4">
+                                    Update Subscription Plan
+                                </h2>
+                                <select
+                                    id="subscriptionSelect"
+                                    class="w-full p-2 border border-gray-300 rounded-md"
+                                >
+                                    <option value="Free">Free</option>
+                                    <option value="BasicMonthly">
+                                        Basic Monthly
+                                    </option>
+                                    <option value="CreatorMonthly">
+                                        Creator Monthly
+                                    </option>
+                                    <option value="PremiumMonthly">
+                                        Premium Monthly
+                                    </option>
+                                    <option value="BasicYearly">
+                                        Basic Yearly
+                                    </option>
+                                    <option value="CreatorYearly">
+                                        Creator Yearly
+                                    </option>
+                                    <option value="PremiumYearly">
+                                        Premium Yearly
+                                    </option>
+                                </select>
+                                <div class="flex justify-end mt-4">
+                                    <button
+                                        id="updateSubscriptionBtn"
+                                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                                    >
+                                        Update
+                                    </button>
+                                    <button
+                                        id="closeModalBtn"
+                                        class="ml-2 bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////////////////////////// Start of Toggle of DashBoard Visibility /////////////////////////// -->
+                <div
+                    class="p-4 border-2 border-gray-400 rounded-lg hidden"
+                    id="toggleVisabilitySection"
+                >
+                    <h2 class="text-lg font-semibold mb-4">
+                        Toggle Pages On and Off
+                    </h2>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
+                        <!-- Start of Video Editor Toggle -->
+                        <div
+                            class="flex items-center p-2 border-2 border-gray-300 rounded-md"
+                        >
+                            <span class="mr-2 text-gray-700">Video Editor</span>
+                            <label
+                                for="toggle-videoEditor"
+                                class="flex items-center cursor-pointer"
+                            >
+                                <div class="relative">
+                                    <input
+                                        id="toggle-videoEditor"
+                                        type="checkbox"
+                                        class="sr-only"
+                                    />
+                                    <div
+                                        class="block bg-gray-600 w-14 h-8 rounded-full"
+                                    ></div>
+                                    <div
+                                        class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="ml-3 text-gray-700 font-medium"
+                                    id="label-videoEditor"
+                                >
+                                    Off
+                                </div>
+                            </label>
+                        </div>
+                        <!-- End of Video Editor Toggle -->
+
+                        <!-- Start of Video Restyle Toggle -->
+                        <div
+                            class="flex items-center p-2 border-2 border-gray-300 rounded-md"
+                        >
+                            <span class="mr-2 text-gray-700"
+                                >Video Restyle</span
+                            >
+                            <label
+                                for="toggle-videoRestyle"
+                                class="flex items-center cursor-pointer"
+                            >
+                                <div class="relative">
+                                    <input
+                                        id="toggle-videoRestyle"
+                                        type="checkbox"
+                                        class="sr-only"
+                                    />
+                                    <div
+                                        class="block bg-gray-600 w-14 h-8 rounded-full"
+                                    ></div>
+                                    <div
+                                        class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="ml-3 text-gray-700 font-medium"
+                                    id="label-videoRestyle"
+                                >
+                                    Off
+                                </div>
+                            </label>
+                        </div>
+                        <!-- End of Video Restyle Toggle -->
+
+                        <!-- Start of Video Voicing Toggle -->
+                        <div
+                            class="flex items-center p-2 border-2 border-gray-300 rounded-md"
+                        >
+                            <span class="mr-2 text-gray-700"
+                                >Video Voicing</span
+                            >
+                            <label
+                                for="toggle-videoVoicing"
+                                class="flex items-center cursor-pointer"
+                            >
+                                <div class="relative">
+                                    <input
+                                        id="toggle-videoVoicing"
+                                        type="checkbox"
+                                        class="sr-only"
+                                    />
+                                    <div
+                                        class="block bg-gray-600 w-14 h-8 rounded-full"
+                                    ></div>
+                                    <div
+                                        class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="ml-3 text-gray-700 font-medium"
+                                    id="label-videoVoicing"
+                                >
+                                    Off
+                                </div>
+                            </label>
+                        </div>
+                        <!-- End of Video Voicing Toggle -->
+
+                        <!-- Start of Lip Sync Toggle -->
+                        <div
+                            class="flex items-center p-2 border-2 border-gray-300 rounded-md"
+                        >
+                            <span class="mr-2 text-gray-700">Lip Sync</span>
+                            <label
+                                for="toggle-lipSync"
+                                class="flex items-center cursor-pointer"
+                            >
+                                <div class="relative">
+                                    <input
+                                        id="toggle-lipSync"
+                                        type="checkbox"
+                                        class="sr-only"
+                                    />
+                                    <div
+                                        class="block bg-gray-600 w-14 h-8 rounded-full"
+                                    ></div>
+                                    <div
+                                        class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="ml-3 text-gray-700 font-medium"
+                                    id="label-lipSync"
+                                >
+                                    Off
+                                </div>
+                            </label>
+                        </div>
+                        <!-- End of Lip Sync Toggle -->
+
+                        <!-- Start of Face Swap Toggle -->
+                        <div
+                            class="flex items-center p-2 border-2 border-gray-300 rounded-md"
+                        >
+                            <span class="mr-2 text-gray-700">Face Swap</span>
+                            <label
+                                for="toggle-faceSwap"
+                                class="flex items-center cursor-pointer"
+                            >
+                                <div class="relative">
+                                    <input
+                                        id="toggle-faceSwap"
+                                        type="checkbox"
+                                        class="sr-only"
+                                    />
+                                    <div
+                                        class="block bg-gray-600 w-14 h-8 rounded-full"
+                                    ></div>
+                                    <div
+                                        class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="ml-3 text-gray-700 font-medium"
+                                    id="label-faceSwap"
+                                >
+                                    Off
+                                </div>
+                            </label>
+                        </div>
+                        <!-- End of Face Swap Toggle -->
+
+                        <!-- Start of 3D Video Modeling Toggle -->
+                        <div
+                            class="flex items-center p-2 border-2 border-gray-300 rounded-md"
+                        >
+                            <span class="mr-2 text-gray-700"
+                                >3D Video Modeling</span
+                            >
+                            <label
+                                for="toggle-threeDVideoModeling"
+                                class="flex items-center cursor-pointer"
+                            >
+                                <div class="relative">
+                                    <input
+                                        id="toggle-threeDVideoModeling"
+                                        type="checkbox"
+                                        class="sr-only"
+                                    />
+                                    <div
+                                        class="block bg-gray-600 w-14 h-8 rounded-full"
+                                    ></div>
+                                    <div
+                                        class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="ml-3 text-gray-700 font-medium"
+                                    id="label-threeDVideoModeling"
+                                >
+                                    Off
+                                </div>
+                            </label>
+                        </div>
+                        <!-- End of 3D Video Modeling Toggle -->
+
+                        <!-- Start of My Avatar Toggle -->
+                        <div
+                            class="flex items-center p-2 border-2 border-gray-300 rounded-md"
+                        >
+                            <span class="mr-2 text-gray-700">My Avatar</span>
+                            <label
+                                for="toggle-myAvatar"
+                                class="flex items-center cursor-pointer"
+                            >
+                                <div class="relative">
+                                    <input
+                                        id="toggle-myAvatar"
+                                        type="checkbox"
+                                        class="sr-only"
+                                    />
+                                    <div
+                                        class="block bg-gray-600 w-14 h-8 rounded-full"
+                                    ></div>
+                                    <div
+                                        class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="ml-3 text-gray-700 font-medium"
+                                    id="label-myAvatar"
+                                >
+                                    Off
+                                </div>
+                            </label>
+                        </div>
+                        <!-- End of My Avatar Toggle -->
+                    </div>
+                </div>
+
+                <!-- Manage User Submits and Pricing Section -->
+                <div id="manageSubmitsAndPricingSection" class="hidden">
+                    <h4 class="text-3xl font-semibold text-gray-700 mb-6">
+                        Set Subscription Plan Credits
+                    </h4>
+                    <div
+                        class="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8"
+                    >
+                        <div
+                            id="creditSettingsContainer"
+                            class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md"
+                        >
+                            <h3
+                                class="text-lg leading-6 font-medium text-gray-900 mb-4"
+                            >
+                                Set Credits for Subscription Plans
+                            </h3>
+                            <form id="setCreditSettingsForm" class="space-y-1">
+                                <div class="flex flex-wrap -mx-2 mb-4">
+                                    <div class="w-full sm:w-1/2 px-2 mb-4">
+                                        <label
+                                            for="subscriptionPlan"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            Subscription Plan
+                                        </label>
+                                        <select
+                                            id="subscriptionPlan"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        >
+                                            <option value="Free">Free</option>
+                                            <option value="BasicMonthly">
+                                                Basic Monthly
+                                            </option>
+                                            <option value="CreatorMonthly">
+                                                Creator Monthly
+                                            </option>
+                                            <option value="PremiumMonthly">
+                                                Premium Monthly
+                                            </option>
+                                            <option value="BasicYearly">
+                                                Basic Yearly
+                                            </option>
+                                            <option value="CreatorYearly">
+                                                Creator Yearly
+                                            </option>
+                                            <option value="PremiumYearly">
+                                                Premium Yearly
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap -mx-2">
+                                    <div class="w-full sm:w-1/3 px-2 mb-4">
+                                        <label
+                                            for="videoEditorCredits"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            Video Editor Credits
+                                        </label>
+                                        <input
+                                            type="number"
+                                            id="videoEditorCredits"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+
+                                    <div class="w-full sm:w-1/3 px-2 mb-4">
+                                        <label
+                                            for="videoRestyleCredits"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            Video Restyle Credits
+                                        </label>
+                                        <input
+                                            type="number"
+                                            id="videoRestyleCredits"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+
+                                    <div class="w-full sm:w-1/3 px-2 mb-4">
+                                        <label
+                                            for="videoVoicingCredits"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            Video Voicing Credits
+                                        </label>
+                                        <input
+                                            type="number"
+                                            id="videoVoicingCredits"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap -mx-2">
+                                    <div class="w-full sm:w-1/3 px-2 mb-4">
+                                        <label
+                                            for="myAvatarCredits"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            My Avatar Credits
+                                        </label>
+                                        <input
+                                            type="number"
+                                            id="myAvatarCredits"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+
+                                    <div class="w-full sm:w-1/3 px-2 mb-4">
+                                        <label
+                                            for="lipSyncCredits"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            Lip Sync Credits
+                                        </label>
+                                        <input
+                                            type="number"
+                                            id="lipSyncCredits"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+
+                                    <div class="w-full sm:w-1/3 px-2 mb-4">
+                                        <label
+                                            for="faceSwapCredits"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            Face Swap Credits
+                                        </label>
+                                        <input
+                                            type="number"
+                                            id="faceSwapCredits"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap -mx-2">
+                                    <div class="w-full sm:w-1/3 px-2 mb-4">
+                                        <label
+                                            for="3dVideoModellingCredits"
+                                            class="block text-sm font-medium text-gray-700"
+                                        >
+                                            3D Video Modelling Credits
+                                        </label>
+                                        <input
+                                            type="number"
+                                            id="threeDVideoModelingCredits"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-center">
+                                    <button
+                                        type="submit"
+                                        class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                                    >
+                                        Set Credit Settings
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div id="messageContainer" class="mt-4 p-4 hidden">
+                                <span id="messageText" class="text-sm"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ////////////////////////////////////////////////////////////////////////////////////////////Manage  Project Section ////////////////////////////// -->
+                <!-- Manage Projects Section -->
+                <div id="manageProjectsSection" class="hidden">
+                    <h2 class="text-3xl font-semibold text-gray-700 mb-6">
+                        Manage Projects
+                    </h2>
+                    <div class="mb-4">
+                        <input
+                            type="text"
+                            id="projectSearchInput"
+                            class="p-2 border border-gray-300 rounded-md w-full md:w-1/2 lg:w-1/3"
+                            placeholder="Search projects by id and status"
+                        />
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white text-xs">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="py-2 px-4 border-b text-left">
+                                        #
+                                    </th>
+                                    <th class="py-2 px-4 border-b text-left">
+                                        Project & User ID
+                                    </th>
+                                    <th class="py-2 px-4 border-b text-left">
+                                        Title
+                                    </th>
+                                    <th class="py-2 px-4 border-b text-left">
+                                        Status
+                                    </th>
+                                    <th class="py-2 px-4 border-b text-left">
+                                        Created At
+                                    </th>
+                                    <th class="py-2 px-4 border-b text-left">
+                                        Options
+                                    </th>
+                                    <th class="py-2 px-4 border-b text-left">
+                                        Actions
+                                    </th>
+                                </tr>
+                                <hr class="border-t-2 border-gray-300 my-4" />
+                            </thead>
+                            <tbody id="projectsTableBody" class="text-gray-700">
+                                <!-- Rows will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+
+                        <!-- Status Update Modal -->
+                        <!-- Update Status Modal -->
+                        <!-- Modal Section -->
+                        <div
+                            id="mediaModal"
+                            class="fixed inset-0 z-[100] hidden items-center justify-center bg-black bg-opacity-50"
+                        >
+                            <div
+                                class="bg-white dark:bg-navy-800 rounded-lg shadow-lg p-6 max-w-lg w-full relative overflow-y-auto max-h-screen"
+                            >
+                                <button
+                                    id="closeMediaModal"
+                                    class="absolute top-4 right-4 text-gray-600 dark:text-gray-300"
+                                    onclick="closeMediaModal()"
+                                >
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </button>
+                                <h2
+                                    class="text-xl font-semibold text-slate-800 dark:text-navy-100 mb-4"
+                                >
+                                    Project Media
+                                </h2>
+                                <ul id="videoList" class="mb-4"></ul>
+                                <ul id="pictureList" class="mb-4"></ul>
+                                <ul id="audioList" class="mb-4"></ul>
+                            </div>
+                        </div>
+
+                        <!-- Buttons and Modals -->
+                        <!-- Media Modal Section -->
+                        <div
+                            id="mediaModal"
+                            class="fixed inset-0 z-[100] hidden items-center justify-center bg-black bg-opacity-50"
+                        >
+                            <div
+                                class="bg-white dark:bg-navy-800 rounded-lg shadow-lg p-6 max-w-lg w-full relative"
+                            >
+                                <button
+                                    id="closeMediaModal"
+                                    class="absolute top-4 right-4 text-gray-600 dark:text-gray-300"
+                                >
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </button>
+
+                                <h2
+                                    class="text-xl font-semibold text-slate-800 dark:text-navy-100 mb-4"
+                                >
+                                    Project Files
+                                </h2>
+
+                                <!-- Picture Gallery -->
+                                <div id="pictureGallery" class="mb-4"></div>
+
+                                <!-- Audio Player -->
+                                <div id="audioPlayerContainer" class="mb-4">
+                                    <audio
+                                        id="audioPlayer"
+                                        controls
+                                        class="w-full"
+                                    >
+                                        <source
+                                            id="audioSource"
+                                            type="audio/mp3"
+                                        />
+                                        Your browser does not support the audio
+                                        tag.
+                                    </audio>
+                                </div>
+
+                                <!-- Video Player -->
+                                <div id="videoPlayerContainer">
+                                    <video
+                                        id="videoPlayerModal"
+                                        controls
+                                        class="w-full rounded-lg mb-4 bg-gray-800"
+                                    >
+                                        <source
+                                            id="videoSourceModal"
+                                            type="video/mp4"
+                                        />
+                                        Your browser does not support the video
+                                        tag.
+                                    </video>
+                                </div>
+
+                                <a
+                                    id="downloadLinkModal"
+                                    href="#"
+                                    download
+                                    class="btn bg-blue-500 text-white hover:bg-blue-600 focus:bg-blue-700 rounded-md px-4 py-2"
+                                    >Download</a
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="updateStatusModal"
+                            class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
+                        >
+                            <div
+                                class="bg-white p-6 rounded shadow-lg w-full max-w-md text-xs"
+                            >
+                                <h2 class="text-lg font-bold mb-4">
+                                    Update Project Status
+                                </h2>
+                                <label for="status" class="block mb-2"
+                                    >Status</label
+                                >
+                                <select
+                                    id="status"
+                                    class="block w-full px-4 py-2 border rounded text-gray-700 focus:outline-none focus:border-blue-500"
+                                >
+                                    <option value="Pending">Pending</option>
+                                    <option value="Processing">
+                                        Processing
+                                    </option>
+                                    <option value="Declined">Declined</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                                <label for="comment" class="block mt-4 mb-2"
+                                    >Comment</label
+                                >
+                                <textarea
+                                    id="comment"
+                                    class="block w-full px-4 py-2 border rounded text-gray-700 focus:outline-none focus:border-blue-500"
+                                ></textarea>
+                                <label
+                                    for="estimatedTime"
+                                    class="block mt-4 mb-2"
+                                    >Estimated Completion Time</label
+                                >
+                                <input
+                                    type="datetime-local"
+                                    id="estimatedTime"
+                                    class="block w-full px-4 py-2 border rounded text-gray-700 focus:outline-none focus:border-blue-500"
+                                />
+                                <div class="mt-6 flex justify-end">
+                                    <button
+                                        onclick="updateProjectStatus()"
+                                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    >
+                                        Update
+                                    </button>
+                                    <button
+                                        onclick="closeUpdateStatusModal()"
+                                        class="ml-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reupload Modal -->
+                        <div
+                            id="reuploadModal"
+                            class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
+                        >
+                            <div
+                                class="bg-white p-6 rounded shadow-lg w-full max-w-md text-xs"
+                            >
+                                <h2 class="text-lg font-bold mb-4">
+                                    Reupload Edited File
+                                </h2>
+                                <input
+                                    type="file"
+                                    id="editedFile"
+                                    class="block w-full px-4 py-2 border rounded text-gray-700 focus:outline-none focus:border-blue-500"
+                                />
+                                <div class="mt-6 flex justify-end">
+                                    <button
+                                        onclick="reuploadEditedFile()"
+                                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    >
+                                        Upload
+                                    </button>
+                                    <button
+                                        onclick="closeReuploadModal()"
+                                        class="ml-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Media Modal -->
+                        <div id="mediaModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <div id="mediaContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////////////////////////////// End of Manage Projects////////////////////////////////// -->
+                <div id="manageAvatarSection" class="hidden">
+                    <h2 class="text-3xl font-semibold text-gray-700 mb-6">
+                        Manage Avatars
+                    </h2>
+                    <form id="updateAvatarForm" enctype="multipart/form-data">
+                        <label for="avatarSelect">Select Avatar:</label>
+                        <select id="avatarSelect" name="avatarId">
+                            <!-- Populate options dynamically -->
+                        </select>
+
+                        <label for="avatarImage">Upload Avatar Image:</label>
+                        <input
+                            type="file"
+                            id="avatarImage"
+                            name="avatarImage"
+                            accept="image/*"
+                        />
+
+                        <label>Upload Images for Available Locations:</label>
+                        <div id="locationImages">
+                            <div>
+                                <label for="locationOffice">Office:</label>
+                                <input
+                                    type="file"
+                                    id="locationOffice"
+                                    name="locationImages[office]"
+                                    accept="image/*"
+                                />
+                            </div>
+                            <div>
+                                <label for="locationStreet">Street:</label>
+                                <input
+                                    type="file"
+                                    id="locationStreet"
+                                    name="locationImages[street]"
+                                    accept="image/*"
+                                />
+                            </div>
+                            <div>
+                                <label for="locationForest">Forest:</label>
+                                <input
+                                    type="file"
+                                    id="locationForest"
+                                    name="locationImages[forest]"
+                                    accept="image/*"
+                                />
+                            </div>
+                            <div>
+                                <label for="locationHome">Home:</label>
+                                <input
+                                    type="file"
+                                    id="locationHome"
+                                    name="locationImages[home]"
+                                    accept="image/*"
+                                />
+                            </div>
+                        </div>
+
+                        <button type="submit">Update Avatar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Function  user
+
+                const fetchUsers = async () => {
+                    try {
+                        const response = await axios.get('/api/users');
+                        const users = response.data.users;
+                        const userTableBody =
+                            document.getElementById('userTableBody');
+                        userTableBody.innerHTML = '';
+
+                        users.forEach((user, index) => {
+                            const row = document.createElement('tr');
+                            row.classList.add(
+                                'bg-gray-100',
+                                'border-b',
+                                'hover:bg-gray-200',
+                                'text-sm',
+                                'font-medium'
+                            );
+
+                            row.innerHTML = `
+                <td class="py-2 px-4">${index + 1}</td>
+                <td class="py-2 px-4">${user._id}</td>
+                <td class="py-2 px-4">${user.firstName} ${
+                                user.lastName || ''
+                            }</td>
+                <td class="py-2 px-4">${user.email}</td>
+                <td class="py-2 px-4">${user.phoneNumber || 'N/A'}</td>
+                <td class="py-2 px-4">${user.address || 'N/A'}</td>
+                <td class="py-2 px-4">${user.subscriptionPlan}</td>
+                <td class="py-2 px-4">
+                    <button
+                        onclick="deleteUser('${user._id}')"
+                        class="text-red-600 hover:text-red-800 font-semibold mr-4">
+                        Delete user
+                    </button><br>
+                    <button
+                        onclick="window.openSubscriptionModal('${user._id}', '${
+                                user.subscriptionPlan
+                            }')"
+                        class="text-blue-600 hover:text-blue-800 font-semibold">
+                        Update Plan
+                    </button>
+                </td>
+            `;
+                            userTableBody.appendChild(row);
+                        });
+                    } catch (error) {
+                        console.error('Error fetching users:', error);
+                    }
+                };
+
+                window.openSubscriptionModal = (userId, currentPlan) => {
+                    selectedUserId = userId;
+                    document.getElementById('subscriptionSelect').value =
+                        currentPlan;
+                    document
+                        .getElementById('subscriptionModal')
+                        .classList.remove('hidden');
+                };
+
+                document
+                    .getElementById('closeModalBtn')
+                    .addEventListener('click', () => {
+                        document
+                            .getElementById('subscriptionModal')
+                            .classList.add('hidden');
+                    });
+
+                document
+                    .getElementById('updateSubscriptionBtn')
+                    .addEventListener('click', async () => {
+                        const newPlan =
+                            document.getElementById('subscriptionSelect').value;
+
+                        try {
+                            await axios.put(
+                                `/update-subscription/${selectedUserId}`,
+                                {
+                                    subscriptionPlan: newPlan,
+                                }
+                            );
+                            fetchUsers(); // Refresh the users table
+                            document
+                                .getElementById('subscriptionModal')
+                                .classList.add('hidden');
+                        } catch (error) {
+                            console.error(
+                                'Error updating subscription plan:',
+                                error
+                            );
+                        }
+                    });
+
+                document
+                    .getElementById('searchInput')
+                    .addEventListener('input', (e) => {
+                        const searchQuery = e.target.value.toLowerCase();
+                        const rows =
+                            document.querySelectorAll('#userTableBody tr');
+
+                        rows.forEach((row) => {
+                            const userId =
+                                row.cells[1].textContent.toLowerCase(); // User ID column
+                            const name = row.cells[2].textContent.toLowerCase(); // Name column
+                            const email =
+                                row.cells[3].textContent.toLowerCase(); // Email column
+
+                            if (
+                                userId.includes(searchQuery) ||
+                                name.includes(searchQuery) ||
+                                email.includes(searchQuery)
+                            ) {
+                                row.classList.remove('hidden');
+                            } else {
+                                row.classList.add('hidden');
+                            }
+                        });
+                    });
+
+                // Fetch users initially
+                fetchUsers();
+                // delete users
+                window.deleteUser = async (userId) => {
+                    const confirmation = confirm(
+                        'Are you sure you want to delete this user?'
+                    );
+                    if (!confirmation) {
+                        return; // Exit the function if the user cancels
+                    }
+
+                    try {
+                        await axios.delete(`/users/${userId}`);
+                        fetchUsers(); // Refresh the user list after deletion
+                    } catch (error) {
+                        console.error('Error deleting user:', error);
+                    }
+                };
+
+                fetchUsers();
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const categoryButtons = document.querySelectorAll(
+                    '#manageProjectslinkBtn li'
+                );
+
+                categoryButtons.forEach((button) => {
+                    button.addEventListener('click', (e) => {
+                        const category = e.target.getAttribute('data-category');
+                        fetchProjects(category);
+                    });
+                });
+
+                // Initial fetch to show all projects sorted by createdAt
+                fetchProjects();
+            });
+            document.addEventListener('DOMContentLoaded', () => {
+                fetchProjects();
+
+                // Event listener for Update Status form submission
+                document
+                    .getElementById('updateStatusForm')
+                    .addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        await updateProjectStatus();
+                    });
+
+                // Event listener for Reupload form submission
+                document
+                    .getElementById('reuploadForm')
+                    .addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        await reuploadEditedFile();
+                    });
+            });
+
+            // Add event listeners to all category buttons
+            document
+                .querySelectorAll('#manageProjectslinkBtn li')
+                .forEach((btn) => {
+                    btn.addEventListener('click', function () {
+                        const category = this.getAttribute('data-category');
+                        fetchProjects(category);
+                    });
+                    fetchProjects();
+                });
+            async function fetchProjects(category = null) {
+                try {
+                    const response = await axios.get('/api/projects');
+                    let projects = response.data.projects;
+
+                    if (category) {
+                        projects = projects.filter(
+                            (project) => project.title === category
+                        );
+                    }
+
+                    // Sort projects by most recent
+                    projects.sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                    );
+
+                    const projectsTableBody =
+                        document.getElementById('projectsTableBody');
+                    projectsTableBody.innerHTML = '';
+
+                    projects.forEach((project, index) => {
+                        const projectRow = document.createElement('tr');
+
+                        const numberCell = document.createElement('td');
+                        numberCell.className = 'py-2 px-4';
+                        numberCell.innerText = index + 1;
+                        projectRow.appendChild(numberCell);
+
+                        const idCell = document.createElement('td');
+                        idCell.className = 'py-2 px-4';
+                        idCell.innerText = `${project._id} / ${project.userId._id}`;
+                        projectRow.appendChild(idCell);
+
+                        const titleCell = document.createElement('td');
+                        titleCell.className = 'py-2 px-4';
+                        titleCell.innerText = project.title;
+                        projectRow.appendChild(titleCell);
+
+                        const statusCell = document.createElement('td');
+                        statusCell.className = 'py-2 px-4';
+                        let statusContent = `<strong>Status: ${project.status}</strong>`;
+
+                        if (project.estimatedCompletionTime) {
+                            statusContent += `<p><strong>ETA:</strong> ${new Date(
+                                project.estimatedCompletionTime
+                            ).toLocaleString()}</p>`;
+                        }
+
+                        if (
+                            project.statusHistory &&
+                            project.statusHistory.length > 0
+                        ) {
+                            const latestStatus =
+                                project.statusHistory[
+                                    project.statusHistory.length - 1
+                                ];
+                            if (latestStatus.comment) {
+                                statusContent += `<p>Comment: ${latestStatus.comment}</p>`;
+                            }
+                        }
+
+                        statusCell.innerHTML = statusContent;
+                        projectRow.appendChild(statusCell);
+
+                        const createdAtCell = document.createElement('td');
+                        createdAtCell.className = 'py-2 px-4';
+                        createdAtCell.innerText = new Date(
+                            project.createdAt
+                        ).toLocaleString();
+                        projectRow.appendChild(createdAtCell);
+
+                        const optionsCell = document.createElement('td');
+                        optionsCell.className = 'py-2 px-4';
+
+                        // Display multiple video links
+                        if (project.videoLink && project.videoLink.length > 0) {
+                            project.videoLink.forEach((link) => {
+                                optionsCell.innerHTML += `<p><strong>Video Link:</strong> <a href="${
+                                    link.startsWith('http')
+                                        ? link
+                                        : `http://${link}`
+                                }" class="text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">${link}</a></p>`;
+                            });
+                        }
+
+                        if (project.videoDescription) {
+                            optionsCell.innerHTML += `<p><strong>Description:</strong> ${project.videoDescription}</p>`;
+                        }
+
+                        if (project.orientation) {
+                            optionsCell.innerHTML += `<p><strong>Orientation:</strong> ${project.orientation}</p>`;
+                        }
+
+                        if (project.location) {
+                            optionsCell.innerHTML += `<p><strong>Location:</strong> ${project.location}</p>`;
+                        }
+
+                        if (project.avatar) {
+                            optionsCell.innerHTML += `<p><strong>Avatar:</strong> ${project.avatar}</p>`;
+                        }
+
+                        projectRow.appendChild(optionsCell);
+
+                        const actionsCell = document.createElement('td');
+                        actionsCell.className = 'py-2 px-4';
+                        actionsCell.innerHTML += `
+                <button
+                    onclick="openUpdateStatusModal('${project._id}')"
+                    class="bg-blue-500 text-white font-bold py-2 px-4 rounded shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-300 mr-2">
+                    Update Status
+                </button><br>
+                <button
+                    onclick="openReuploadModal('${project._id}')"
+                    class="bg-green-500 text-white font-bold py-2 px-4 rounded shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300 mr-2">
+                    Reupload
+                </button><br> 
+                <button
+                    onclick="openMediaModal('${project._id}')"
+                    class="bg-indigo-500 text-white font-bold py-2 px-4 rounded shadow-md hover:bg-indigo-700 hover:shadow-lg transition-all duration-300">
+                    View Project Files
+                </button>
+                <button
+                    onclick="deleteProject('${project._id}')"
+                    class="bg-red-500 text-white font-bold py-2 px-4 rounded shadow-md hover:bg-red-700 hover:shadow-lg transition-all duration-300">
+                    Delete Project
+                </button><br><br>
+            `;
+                        projectRow.appendChild(actionsCell);
+
+                        projectsTableBody.appendChild(projectRow);
+
+                        const hrRow = document.createElement('tr');
+                        const hrCell = document.createElement('td');
+                        hrCell.setAttribute('colspan', '7');
+                        hrCell.innerHTML =
+                            '<hr class="border-t-2 border-gray-300 my-4">';
+                        hrRow.appendChild(hrCell);
+                        projectsTableBody.appendChild(hrRow);
+                    });
+                } catch (error) {
+                    console.error('Failed to fetch projects:', error);
+                }
+            }
+
+            function openUpdateStatusModal(projectId) {
+                document.getElementById('updateStatusModal').dataset.projectId =
+                    projectId;
+                document
+                    .getElementById('updateStatusModal')
+                    .classList.remove('hidden');
+            }
+
+            function closeUpdateStatusModal() {
+                document
+                    .getElementById('updateStatusModal')
+                    .classList.add('hidden');
+            }
+
+            async function updateProjectStatus() {
+                const projectId =
+                    document.getElementById('updateStatusModal').dataset
+                        .projectId;
+                const status = document.getElementById('status').value;
+                const comment = document.getElementById('comment').value;
+                const estimatedTime =
+                    document.getElementById('estimatedTime').value;
+
+                try {
+                    await axios.post(
+                        `/api/admin/update-project-status/${projectId}`,
+                        {
+                            status,
+                            comment,
+                            estimatedCompletionTime: estimatedTime,
+                        }
+                    );
+                    closeUpdateStatusModal();
+                    fetchProjects();
+                } catch (error) {
+                    console.error('Failed to update project status:', error);
+                }
+            }
+
+            function openReuploadModal(projectId) {
+                document.getElementById('reuploadModal').dataset.projectId =
+                    projectId;
+                document
+                    .getElementById('reuploadModal')
+                    .classList.remove('hidden');
+            }
+
+            function closeReuploadModal() {
+                document
+                    .getElementById('reuploadModal')
+                    .classList.add('hidden');
+            }
+
+            async function reuploadEditedFile() {
+                const projectId =
+                    document.getElementById('reuploadModal').dataset.projectId;
+                const formData = new FormData();
+                formData.append(
+                    'file',
+                    document.getElementById('editedFile').files[0]
+                );
+
+                try {
+                    await axios.post(
+                        `/api/projects/${projectId}/reupload`,
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                            },
+                        }
+                    );
+                    closeReuploadModal();
+                    fetchProjects();
+                } catch (error) {
+                    console.error('Failed to reupload file:', error);
+                }
+            }
+
+            async function deleteProject(projectId) {
+                const confirmation = confirm(
+                    'Are you sure you want to delete this project?'
+                );
+                if (!confirmation) {
+                    return; // If the user cancels, exit the function
+                }
+
+                try {
+                    await axios.delete(`/api/projects/${projectId}`);
+                    fetchProjects();
+                } catch (error) {
+                    console.error('Failed to delete project:', error);
+                }
+            }
+            document
+                .getElementById('projectSearchInput')
+                .addEventListener('input', (e) => {
+                    const searchQuery = e.target.value.toLowerCase();
+                    const rows = document.querySelectorAll(
+                        '#projectsTableBody tr'
+                    );
+
+                    rows.forEach((row) => {
+                        // Skip rows that don't have the expected number of cells (7 in this case)
+                        if (row.cells.length < 7) return;
+
+                        const projectId =
+                            row.cells[1].textContent.toLowerCase(); // Project ID column
+                        const status = row.cells[3].textContent.toLowerCase(); // Status column
+
+                        if (
+                            projectId.includes(searchQuery) ||
+                            status.includes(searchQuery)
+                        ) {
+                            row.classList.remove('hidden');
+                        } else {
+                            row.classList.add('hidden');
+                        }
+                    });
+                });
+        </script>
+        <script>
+            document
+                .getElementById('setCreditSettingsForm')
+                .addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    // Retrieve form values
+                    const subscriptionPlan =
+                        document.getElementById('subscriptionPlan').value;
+                    const videoEditorCredits =
+                        parseInt(
+                            document.getElementById('videoEditorCredits').value
+                        ) || 0;
+                    const videoRestyleCredits =
+                        parseInt(
+                            document.getElementById('videoRestyleCredits').value
+                        ) || 0;
+                    const videoVoicingCredits =
+                        parseInt(
+                            document.getElementById('videoVoicingCredits').value
+                        ) || 0;
+                    const myAvatarCredits =
+                        parseInt(
+                            document.getElementById('myAvatarCredits').value
+                        ) || 0;
+                    const lipSyncCredits =
+                        parseInt(
+                            document.getElementById('lipSyncCredits').value
+                        ) || 0;
+                    const faceSwapCredits =
+                        parseInt(
+                            document.getElementById('faceSwapCredits').value
+                        ) || 0;
+                    const threeDVideoModelingCredits =
+                        parseInt(
+                            document.getElementById(
+                                'threeDVideoModelingCredits'
+                            ).value
+                        ) || 0;
+
+                    // Reference to the message container and text elements
+                    const messageContainer =
+                        document.getElementById('messageContainer');
+                    const messageText = document.getElementById('messageText');
+
+                    try {
+                        await axios.post('/set-credits', {
+                            subscriptionPlan,
+                            credits: [
+                                {
+                                    feature: 'videoEditor',
+                                    credits: videoEditorCredits,
+                                },
+                                {
+                                    feature: 'videoRestyle',
+                                    credits: videoRestyleCredits,
+                                },
+                                {
+                                    feature: 'videoVoicing',
+                                    credits: videoVoicingCredits,
+                                },
+                                {
+                                    feature: 'myAvatar',
+                                    credits: myAvatarCredits,
+                                },
+                                { feature: 'lipSync', credits: lipSyncCredits },
+                                {
+                                    feature: 'faceSwap',
+                                    credits: faceSwapCredits,
+                                },
+                                {
+                                    feature: '3dVideoModeling',
+                                    credits: threeDVideoModelingCredits,
+                                },
+                            ],
+                        });
+
+                        messageContainer.classList.remove('hidden');
+                        messageText.textContent = 'Credits Successfully Set';
+                        messageContainer.classList.add(
+                            'bg-green-100',
+                            'text-green-800'
+                        );
+                    } catch (error) {
+                        console.error('Error setting credits:', error);
+                        document.getElementById('messageText').textContent =
+                            'Failed to set credits';
+                        document
+                            .getElementById('messageContainer')
+                            .classList.remove('hidden');
+                    }
+                });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const ids = [
+                    'videoEditor',
+                    'videoRestyle',
+                    'videoVoicing',
+                    'lipSync',
+                    'faceSwap',
+                    'threeDVideoModeling',
+                    'myAvatar',
+                ];
+
+                ids.forEach((id) => {
+                    const toggle = document.getElementById(`toggle-${id}`);
+                    const label = document.getElementById(`label-${id}`);
+                    const key = `dashboardVisibility-${id}`;
+
+                    // Check the saved state and apply it
+                    const savedState = localStorage.getItem(key) === 'true';
+                    toggle.checked = savedState;
+                    label.textContent = savedState ? 'On' : 'Off';
+
+                    // Add event listener for toggle changes
+                    toggle.addEventListener('change', () => {
+                        const isVisible = toggle.checked; // Correctly assign the toggle state
+                        localStorage.setItem(key, isVisible);
+                        setDashboardVisibility(id, isVisible);
+                        label.textContent = isVisible ? 'On' : 'Off';
+                    });
+                });
+
+                function setDashboardVisibility(id, isVisible) {
+                    axios
+                        .post('/api/toggle-dashboard-visibility', {
+                            cardId: id,
+                            isVisible: isVisible, // Send the correct value to the server
+                        })
+                        .then((response) => {
+                            console.log(
+                                `Visibility setting updated for ${id}: ${isVisible}`
+                            );
+                        })
+                        .catch((error) => {
+                            console.error(
+                                `Error updating visibility setting for ${id}:`,
+                                error
+                            );
+                        });
+                }
+            });
+        </script>
+        <script>
+            function openMediaModal(projectId) {
+                // Fetch the project media files from the server
+                axios
+                    .get(`/api/admin/get-project-media/${projectId}`)
+                    .then((response) => {
+                        const { videoFiles, pictureFiles, audioFiles } =
+                            response.data;
+
+                        // Populate the modal with media files
+                        const videoList = document.getElementById('videoList');
+                        const pictureList =
+                            document.getElementById('pictureList');
+                        const audioList = document.getElementById('audioList');
+
+                        videoList.innerHTML = '';
+                        pictureList.innerHTML = '';
+                        audioList.innerHTML = '';
+
+                        videoFiles.forEach((video, index) => {
+                            const videoItem = document.createElement('li');
+                            videoItem.innerHTML = `
+                    <video controls class="w-full mb-2 rounded-lg">
+                        <source src="${video}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <a href="${video}" download class="text-blue-500 hover:underline">Download Video ${
+                                index + 1
+                            }</a>
+                `;
+                            videoList.appendChild(videoItem);
+                        });
+
+                        pictureFiles.forEach((picture, index) => {
+                            const pictureItem = document.createElement('li');
+                            pictureItem.innerHTML = `
+                    <img src="${picture}" class="w-full mb-2 rounded-lg">
+                    <a href="${picture}" download class="text-blue-500 hover:underline">Download Picture ${
+                                index + 1
+                            }</a>
+                `;
+                            pictureList.appendChild(pictureItem);
+                        });
+
+                        audioFiles.forEach((audio, index) => {
+                            const audioItem = document.createElement('li');
+                            audioItem.innerHTML = `
+                    <audio controls class="w-full mb-2">
+                        <source src="${audio}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <a href="${audio}" download class="text-blue-500 hover:underline">Download Audio ${
+                                index + 1
+                            }</a>
+                `;
+                            audioList.appendChild(audioItem);
+                        });
+
+                        // Show the modal
+                        const modal = document.getElementById('mediaModal');
+                        modal.classList.remove('hidden');
+                        modal.classList.add('flex');
+                    })
+                    .catch((error) => {
+                        console.error('Failed to fetch project media:', error);
+                    });
+            }
+
+            function closeMediaModal() {
+                const modal = document.getElementById('mediaModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        </script>
+        <script>
+            // public/admin-register.js
+            document
+                .getElementById('admin-register-form')
+                .addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const isSuperuser =
+                        document.getElementById('isSuperuser').checked;
+                    const messageDiv = document.getElementById('message');
+
+                    try {
+                        const response = await axios.post('/admin/register', {
+                            email,
+                            password,
+                            isSuperuser,
+                        });
+
+                        messageDiv.textContent = 'Admin created successfully';
+                        messageDiv.style.color = 'green';
+                    } catch (error) {
+                        console.error(error);
+                        messageDiv.textContent = 'Error creating admin';
+                        messageDiv.style.color = 'red';
+                    }
+                });
+        </script>
+        <script>
+            const sidebarLinks = document.querySelectorAll('.cursor-pointer');
+            const sections = document.querySelectorAll(
+                '#manageAdminSection, #manageAvatarSection, #manageUsersSection, #manageProjectsSection, #toggleVisabilitySection, #manageSubmitsAndPricingSection, #changeAdminPasswordSection, #adminListSection'
+            );
+
+            // Function to hide all sections
+            const hideAllSections = () => {
+                sections.forEach((section) => section.classList.add('hidden'));
+            };
+
+            // Function to show the relevant section
+            const showSection = (sectionId) => {
+                hideAllSections();
+                document.getElementById(sectionId).classList.remove('hidden');
+            };
+
+            // Event listener for sidebar links
+            sidebarLinks.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    const targetId = e.target.id;
+
+                    if (targetId === 'manageAdminBtn') {
+                        showSection('manageAdminSection');
+                    } else if (targetId === 'manageUsersBtn') {
+                        showSection('manageUsersSection');
+                    } else if (targetId === 'manageProjectsBtn') {
+                        showSection('manageProjectsSection');
+                    } else if (targetId === 'toggleVisability') {
+                        showSection('toggleVisabilitySection');
+                    } else if (targetId === 'manageSubmitsAndPricing') {
+                        showSection('manageSubmitsAndPricingSection');
+                    } else if (targetId === 'changeAdminPasswordSectionBtn') {
+                        showSection('changeAdminPasswordSection');
+                    } else if (targetId === 'adminListBtn') {
+                        showSection('adminListSection');
+                    } else if (targetId === 'registerAdmin') {
+                        showSection('manageAdminSection');
+                    } else if (targetId === 'manageAvatarBtn') {
+                        showSection('manageAvatarSection');
+                    }
+
+                    // Toggle visibility of nested ul elements
+                    const nestedUl = e.target.nextElementSibling;
+                    if (nestedUl && nestedUl.tagName === 'UL') {
+                        nestedUl.classList.toggle('hidden');
+                    }
+                });
+            });
+        </script>
+        <script>
+            document
+                .getElementById('admin-password-form')
+                .addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+
+                    try {
+                        const response = await axios.post(
+                            '/admin/adminChangePassword',
+                            { email, password }
+                        );
+
+                        if (response.status === 200) {
+                            document.getElementById(
+                                'changePasswordMessage'
+                            ).textContent = 'Password changed successfully!';
+                            document
+                                .getElementById('changePasswordMessage')
+                                .classList.add('text-green-500');
+                        }
+                    } catch (error) {
+                        document.getElementById(
+                            'changePasswordMessage'
+                        ).textContent =
+                            error.response.data.msg ||
+                            'Error changing password';
+                        document
+                            .getElementById('changePasswordMessage')
+                            .classList.add('text-red-500');
+                    }
+                });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const adminTableBody =
+                    document.querySelector('#adminTable tbody');
+
+                // Fetch the admin data from the API
+                fetch('/admin/admins')
+                    .then((response) => response.json())
+                    .then((admins) => {
+                        // Clear the table body
+                        adminTableBody.innerHTML = '';
+
+                        // Populate the table with the fetched admins
+                        admins.forEach((admin) => {
+                            const row = document.createElement('tr');
+                            row.classList.add('border-t'); // Add border to each row
+
+                            const idCell = document.createElement('td');
+                            idCell.textContent = admin._id;
+                            idCell.classList.add(
+                                'py-4',
+                                'px-6',
+                                'text-sm',
+                                'text-gray-700'
+                            ); // Add Tailwind classes to the cell
+                            row.appendChild(idCell);
+
+                            const emailCell = document.createElement('td');
+                            emailCell.textContent = admin.email;
+                            emailCell.classList.add(
+                                'py-4',
+                                'px-6',
+                                'text-sm',
+                                'text-gray-700'
+                            ); // Add Tailwind classes to the cell
+                            row.appendChild(emailCell);
+
+                            const isSuperUserCell =
+                                document.createElement('td');
+                            isSuperUserCell.textContent = admin.isSuperuser
+                                ? 'Yes'
+                                : 'No';
+                            isSuperUserCell.classList.add(
+                                'py-4',
+                                'px-6',
+                                'text-sm',
+                                'text-gray-700'
+                            ); // Add Tailwind classes to the cell
+                            row.appendChild(isSuperUserCell);
+
+                            const actionsCell = document.createElement('td');
+                            actionsCell.classList.add(
+                                'py-4',
+                                'px-6',
+                                'text-sm',
+                                'text-gray-700'
+                            ); // Add Tailwind classes to the cell
+                            const deleteButton =
+                                document.createElement('button');
+                            deleteButton.textContent = 'Delete';
+                            deleteButton.classList.add(
+                                'bg-red-500',
+                                'hover:bg-red-600',
+                                'text-white',
+                                'font-bold',
+                                'py-1',
+                                'px-3',
+                                'rounded'
+                            ); // Add Tailwind classes to the button
+                            deleteButton.addEventListener('click', () =>
+                                handleDelete(admin._id)
+                            );
+                            actionsCell.appendChild(deleteButton);
+                            row.appendChild(actionsCell);
+
+                            adminTableBody.appendChild(row);
+                        });
+                    })
+                    .catch((error) =>
+                        console.error('Error fetching admins:', error)
+                    );
+            });
+
+            // Handle delete action
+            function handleDelete(adminId) {
+                if (confirm('Are you sure you want to delete this admin?')) {
+                    fetch(`/admin/admins/${adminId}`, {
+                        method: 'DELETE',
+                    })
+                        .then((response) => response.json())
+                        .then((result) => {
+                            alert(result.message);
+                            location.reload(); // Reload the page to reflect changes
+                        })
+                        .catch((error) =>
+                            console.error('Error deleting admin:', error)
+                        );
+                }
+            }
+        </script>
+        <script>
+            document
+                .getElementById('updateAvatarForm')
+                .addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const formData = new FormData(this);
+                    const avatarId = formData.get('avatarId');
+                    if (!avatarId) {
+                        alert('Please select an avatar to update.');
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(
+                            `/api/update-avatar/${avatarId}`,
+                            {
+                                method: 'PUT',
+                                body: formData,
+                            }
+                        );
+
+                        if (response.ok) {
+                            const updatedAvatar = await response.json();
+                            alert('Avatar updated successfully!');
+                        } else {
+                            const errorData = await response.json();
+                            alert(
+                                `Failed to update avatar: ${errorData.error}`
+                            );
+                        }
+                    } catch (error) {
+                        console.error('Error updating avatar:', error);
+                        alert('An error occurred while updating the avatar.');
+                    }
+                });
+
+            async function populateAvatars() {
+                try {
+                    const response = await fetch('/api/avatars');
+                    const avatars = await response.json();
+                    const avatarSelect =
+                        document.getElementById('avatarSelect');
+
+                    // Clear existing options
+                    avatarSelect.innerHTML = '';
+
+                    avatars.forEach((avatar) => {
+                        const option = document.createElement('option');
+                        option.value = avatar._id;
+                        option.textContent = `Avatar ${avatar.number}`; // Adjust according to your data
+                        avatarSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error fetching avatars:', error);
+                    alert('Failed to load avatars.');
+                }
+            }
+
+            populateAvatars();
+        </script>
+    </body>
+</html>
