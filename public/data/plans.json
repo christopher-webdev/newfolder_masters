@@ -1,0 +1,108 @@
+[
+  {
+    "plan_id": "290b466b-e76b-e4d10-ab03-6269701cd0a0",
+    "plan_title": "Basic",
+    "plan_heading": "For large teams & corporations",
+    "plan_price": "1000",
+    "plan_url": "#",
+    "plan_status": "Best Offer",
+    "plan_subscription": "monthly",
+    "features": [
+      "7,700 3-5 day turnaround",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "AI Blog Updates via dashboard & slack",
+      "Advance Updates via dashboard & slack"
+    ]
+  },
+  {
+    "plan_id": "290b466b-ew76b-4d10-ab03-6269701cd0a0",
+    "plan_title": "Creator",
+    "plan_heading": "For large teams & corporations",
+    "plan_price": "$499.00",
+    "plan_url": "#",
+    "plan_status": "Best Offer",
+    "plan_subscription": "monthly",
+    "features": [
+      "12,700 7-9 day turnarouord",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "7,700 3-5 day turnarouord",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "AI Blog Updates via dashboard & slack",
+      "Advance Updates via dashboard & slack"
+    ]
+  },
+  {
+    "plan_id": "290b466b-e76b-4d10d-ab03-6269701cd0a0",
+    "plan_title": "Enterprise",
+    "plan_heading": "For large teams & corporations",
+    "plan_price": "$599.00",
+    "plan_url": "#",
+    "plan_status": "Ordinary",
+    "plan_subscription": "yearly",
+    "features": [
+      "15,700 15-30 day turnarouord",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "7,700 3-5 day turnarouord",
+      "AI Blog Updates via dashboard & slack",
+      "Advance Updates via dashboard & slack"
+    ],
+    "features[]": "5+ Task delivered one-by-one"
+  },
+  {
+    "plan_id": "290b466b-e76b-4d10-sab03-6269701cd0a0",
+    "plan_title": "Basic",
+    "plan_heading": "For large teams & corportaions",
+    "plan_subscription": "monthly",
+    "plan_price": "Free",
+    "plan_url": "#",
+    "plan_status": "Ordinary",
+    "features": [
+      "7,700 3-5 day turnarouord",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "AI Blog Updates via dashboard & slack",
+      "Advance Updates via dashboard & slack"
+    ]
+  },
+  {
+    "plan_id": "111f5c16-8f34-4999-a15b-a9d0487a2e1c",
+    "plan_title": "Premium",
+    "plan_heading": "For large teams & corportaions",
+    "plan_subscription": "monthly",
+    "plan_price": "$60.50",
+    "plan_url": "#",
+    "plan_status": "Best Offer",
+    "features": [
+      "12,700 7-9 day turnarouord",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "7,700 3-5 day turnarouord",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "AI Blog Updates via dashboard & slack",
+      "Advance Updates via dashboard & slack"
+    ]
+  },
+  {
+    "plan_id": "50123728-fa4a-4a25-afe1-f8d61572c362",
+    "plan_title": "Enterprise",
+    "plan_heading": "For large teams & corportaions",
+    "plan_subscription": "yearly",
+    "plan_price": "$80.50",
+    "plan_url": "#",
+    "plan_status": "Ordinary",
+    "features": [
+      "15,700 15-30 day turnarouord",
+      "6+ Naive development",
+      "5+ Task delivered one-by-one",
+      "7,700 3-5 day turnarouord",
+      "6+ Naive development",
+      "AI Blog Updates via dashboard & slack",
+      "Advance Updates via dashboard & slack"
+    ]
+  }
+]

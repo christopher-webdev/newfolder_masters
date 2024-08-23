@@ -1,0 +1,56 @@
+<!-- public/admin-register.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Registration</title>
+    </head>
+    <body>
+        <form id="admin-register-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+            <br />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+            <br />
+            <label for="isSuperuser">Is Superuser:</label>
+            <input type="checkbox" id="isSuperuser" name="isSuperuser" />
+            <br />
+            <button type="submit">Register</button>
+        </form>
+        <div id="message"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="admin-register.js"></script>
+        <script>
+            // public/admin-register.js
+            document
+                .getElementById('admin-register-form')
+                .addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const isSuperuser =
+                        document.getElementById('isSuperuser').checked;
+                    const messageDiv = document.getElementById('message');
+
+                    try {
+                        const response = await axios.post('/admin/register', {
+                            email,
+                            password,
+                            isSuperuser,
+                        });
+
+                        messageDiv.textContent = 'Admin created successfully';
+                        messageDiv.style.color = 'green';
+                    } catch (error) {
+                        console.error(error);
+                        messageDiv.textContent = 'Error creating admin';
+                        messageDiv.style.color = 'red';
+                    }
+                });
+        </script>
+    </body>
+</html>
