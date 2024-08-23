@@ -25,6 +25,8 @@ const Admin = require('./models/Admin');
 const bcrypt = require('bcryptjs');
 const userInfoController = require('./controllers/user.controller');
 const userBillingController = require('./controllers/user-billing.controller');
+const Package = require('./models/Package');
+const userPackageController = require('./controllers/package.controller');
 
 // Passport Config
 require('./config/passport')(passport);
@@ -195,9 +197,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/auth', require('./routes/auth'));
 app.use('/admin', require('./routes/admin'));
 
+
 //handles user info updates
 app.use('/api/user-info', ensureAuthenticated, userInfoController);
-app.use('/api/billings', ensureAuthenticated, userBillingController);
+app.use('/api/billings',  userBillingController);
+app.use('/api/packages', userPackageController);
 
 // Serve index.html for the root URL
 app.get('/', (req, res) => {
@@ -827,6 +831,12 @@ app.post('/set-credits', async (req, res) => {
 
         // Save the updated subscription plan
         await plan.save();
+        
+        await Package.findOneAndUpdate(
+            {name: plan.plan},
+            { creditStore: plan.id },
+            { upsert: true }
+        );
 
         res.status(200).json({ message: 'Credits successfully set' });
     } catch (error) {

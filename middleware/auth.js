@@ -1,3 +1,5 @@
+const { User, SubscriptionPlan } = require("../models/User");
+
 // middleware/auth.js
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated() && req.user.isSignedIn) {

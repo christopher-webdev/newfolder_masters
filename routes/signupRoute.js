@@ -7,7 +7,10 @@ const { SubscriptionPlan } = require('../models/User');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const { check, validationResult } = require('express-validator');
-const { PORT } = require('../config');
+const { PORT , stripe} = require('../config');
+const Package = require('../models/Package');
+const { Package: EPackage } = require('../enums/Package');
+const PaymentProvider = require('../models/PaymentProvider');
 
 // Define the function to update credits
 const updateUserCredits = async (user, subscriptionPlan) => {
@@ -88,6 +91,18 @@ router.post(
             const verificationToken = crypto.randomBytes(32).toString('hex');
             console.log(verificationToken);
             const verificationLink = `https://gunnyfrisch.shop/auth/verify-email?token=${verificationToken}`;
+            
+            const plan = await Package.findOne({ name: EPackage.Free.name });
+            if (!plan) {
+                res.status(200).json({
+                    msg: 'Cant create user. Please ensure packages have been uploaded.',
+                });
+                return;
+            }
+
+
+            await SubscriptionPlan.create({ plan: plan.name });
+    
 
             user = new User({
                 firstName,
@@ -96,14 +111,15 @@ router.post(
                 password,
                 isVerified: false,
                 verificationToken,
-                subscriptionPlan: subscriptionPlan || 'Free', // Set default subscription plan
+                subscriptionPlan:  plan.name  || 'Free', // Set default subscription plan
+                activePackage: plan.id,
             });
 
             await user.save();
             console.log(verificationToken);
 
             // Apply credits based on the subscription plan
-            await updateUserCredits(user, subscriptionPlan || 'Free');
+            await updateUserCredits(user, plan.name || 'Free');
 
             await transporter.sendMail({
                 to: user.email,

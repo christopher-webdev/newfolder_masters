@@ -32,6 +32,7 @@
                     <li
                         class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
                         id="manageAdminBtn"
+                        data-url="manage-admins"
                     >
                         Manage Admin
                     </li>
@@ -58,6 +59,7 @@
                     <li
                         class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
                         id="manageUsersBtn"
+                        data-url="manage-users"
                     >
                         Manage Users
                     </li>
@@ -82,7 +84,7 @@
                     >
                         Manage Projects
                     </li>
-                    <ul class="ml-4 mt-2 hidden" id="manageProjectslinkBtn">
+                    <ul class="ml-4 mt-2 hidden" data-url="manage-projects" id="manageProjectslinkBtn">
                         <li
                             class="px-4 py-2 hover:bg-gray-600 cursor-pointer"
                             data-category=""
@@ -138,6 +140,10 @@
                     >
                         Manage Avatar
                     </li>
+                    <li class="router px-4 py-2 hover:bg-gray-600 cursor-pointer" id="managePackagesBtn"
+                    data-url="manage-packages">
+                    Manage Plans
+                </li>
                 </ul>
             </div>
 
@@ -310,9 +316,10 @@
                         </table>
                     </div>
                 </section>
+                
                 <!-- /////////////////////////////////////// Start of Manage Users ////////////////////////// -->
                 <!-- Manage Users Section -->
-                <div id="manageUsersSection" class="hidden">
+                <div id="manageUsersSection" class="sidebar-content manage-users">
                     <h2 class="text-3xl font-semibold text-gray-700 mb-6">
                         Manage Users
                     </h2>
@@ -642,7 +649,7 @@
                 </div>
 
                 <!-- Manage User Submits and Pricing Section -->
-                <div id="manageSubmitsAndPricingSection" class="hidden">
+                <div id="manageSubmitsAndPricingSection" class="hidden sidebar-content manage-pricings">
                     <h4 class="text-3xl font-semibold text-gray-700 mb-6">
                         Set Subscription Plan Credits
                     </h4>
@@ -816,7 +823,7 @@
                 </div>
                 <!-- ////////////////////////////////////////////////////////////////////////////////////////////Manage  Project Section ////////////////////////////// -->
                 <!-- Manage Projects Section -->
-                <div id="manageProjectsSection" class="hidden">
+                <div id="manageProjectsSection" class="hidden sidebar-content manage-projects">
                     <h2 class="text-3xl font-semibold text-gray-700 mb-6">
                         Manage Projects
                     </h2>
@@ -1080,7 +1087,7 @@
                     </div>
                 </div>
                 <!-- ///////////////////////////////////////// End of Manage Projects////////////////////////////////// -->
-                <div id="manageAvatarSection" class="hidden">
+                <div id="manageAvatarSection"  class="hidden sidebar-content manage-projects">
                     <h2 class="text-3xl font-semibold text-gray-700 mb-6">
                         Manage Avatars
                     </h2>
@@ -1141,12 +1148,380 @@
                         <button type="submit">Update Avatar</button>
                     </form>
                 </div>
+
+                
+            <!-- Manage Subscriptons packages and benefits  Section -->
+            <div id="managePackageAndPricingSection" class="hidden sidebar-content manage-packages">
+                <h4 class="text-3xl font-semibold text-gray-700 mb-6">
+                    Create Packages and Benefits
+                </h4>
+                <div class="mx-auto bg-white shadow-lg rounded-lg p-8">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                        Set Subscription Plans
+                    </h3>
+                    <div id="" class="mx-auto p-6 bg-white shadow-md rounded-md">
+                        <!-- <form id="" class="space-y-1"> -->
+                        <button type="button" id="AddPackageBtn" class="block p-2 border bg-green-500">Add A
+                            Plan</button>
+                        <!-- <template> -->
+                        <div class="flex  mb-4">
+                            <!-- <div class="w-full sm:w-1/2 px-2 mb-4"> -->
+
+                            <div id="packagesContainer"></div>
+
+                            <!-- </div> -->
+                        </div>
+                        <!-- </template> -->
+
+                        <!-- </form> -->
+
+                        <div id="messageContainer" class="mt-4 p-4 hidden">
+                            <span id="messageText" class="text-sm"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
+                const routers = document.querySelectorAll(".router")
+                const path = (new URL(window.location)).pathname
+    
+                routers.forEach(el => el.addEventListener("click", handleRouting), false)
+    
+                function handleRouting($this) {
+                    const url = $this.target.dataset.url
+                    window.history.pushState(url, undefined, `/${url}`)
+                    document.querySelectorAll(`.sidebar-content`).forEach(el => el.classList.add("hidden"))
+                    document.querySelector(`.${url.replaceAll("/", "")}`).classList.remove("hidden")
+                }
+            })
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
                 // Function  user
+    let AvailablePackages = {}
+
+            document.getElementById('AddPackageBtn').addEventListener("click", () => addNewPackageField(undefined, false))
+
+            function buildFormData(form) {
+                // Convert form data to a JSON object, handling multiple fields with the same name
+                const formData = new FormData(form);
+                const formObject = {};
+                const benefits = [];
+
+                for (const [key, value] of formData) {
+                    if (key === 'benefits') {
+                        // If key is benefit_name, push a new object into benefits array
+                        benefits.push({ name: value, isAvailable: false });
+                    } else if (key === 'isAvailable' && benefits.length > 0) {
+                        // Update the isAvailable field of the last benefit in the array
+                        benefits[benefits.length - 1].isAvailable = value == 'on'
+                    } else {
+                        // For other fields, add them directly to the formObject
+                        if (formObject[key]) {
+                            // If the key already exists, convert it to an array and push the new value
+                            if (Array.isArray(formObject[key])) {
+                                formObject[key].push(value);
+                            } else {
+                                formObject[key] = [formObject[key], value];
+                            }
+                        } else {
+                            formObject[key] = value;
+                        }
+                    }
+                };
+
+                // Add the benefits array to the formObject
+                formObject.benefits = benefits;
+                return formObject
+            }
+
+
+            function addNewPackageField(pkg, isNew = true) {
+                const container = document.createElement("form")
+                const benefitInfoField = document.createElement("p")
+                const benefitcontainer = document.createElement("div")
+                const packagePrice = document.createElement('input')
+
+                const packageHiddenId = document.createElement('input')
+
+                const addBenefitBtn = document.createElement('button')
+                const removePackageBtn = document.createElement('button')
+                const submitButton = document.createElement('button')
+
+                // const packageInterval = document.createElement('select')
+                benefitInfoField.innerText = "Please check the box if the corresponding benefit is available for this package"
+                const packageName = document.createElement('select')
+                packageName.name = "name"
+                packageName.disabled = isNew
+
+
+                const packageInterval = document.createElement('select')
+                packageInterval.name = "interval"
+                packageInterval.disabled = isNew
+
+                AvailablePackages?.allowedIntervals?.forEach(el => {
+                    const option = document.createElement('option')
+                    option.value = el
+                    option.innerText = pkg?.interval || el
+                    packageInterval.append(option)
+                })
+
+
+                AvailablePackages?.allowedPackages?.forEach(el => {
+                    const option = document.createElement('option')
+                    option.value = el.name
+                    option.innerText = pkg?.name || el.name
+                    packageName.append(option)
+                })
+
+
+                // packageName.value = pkg?.name || ""
+                // packageName.disabled = isNew
+
+
+                packageHiddenId.name = "packageId"
+                packageHiddenId.value = pkg?._id || ""
+                packageHiddenId.hidden = true
+
+
+                packagePrice.name = "amount"
+                packagePrice.value = pkg?.amount || ""
+                packagePrice.disabled = pkg?.name === "Free"
+
+                // packageInterval.name = "interval"
+                // packageInterval.value = pkg?.interval || ""
+                // packageInterval.disabled = true
+
+                packageName.placeholder = "Write Package name"
+                packagePrice.placeholder = "Add Price"
+                packageInterval.placeholder = "month, year"
+
+                container.className = "p-4 border border-blue-500 my-4 bg-gray-300 rounded-md"
+                benefitInfoField.className = "p-4 border my-4 bg-yellow-100 text-yellow-600"
+                benefitcontainer.className = "p-2"
+                packageName.className = "p-2 mr-2"
+
+                packagePrice.className = "p-2 mr-2"
+                packageInterval.className = "p-2 mr-2"
+                packageInterval.disabled = isNew
+
+                addBenefitBtn.className = "p-2 border bg-gray-500 rounded-md text-white mr-2"
+                removePackageBtn.className = "p-2 border bg-gray-500 rounded-md text-white mr-2"
+                submitButton.className = "p-2 border bg-gray-500 rounded-md text-white mr-2 text-white"
+
+                removePackageBtn.type = "button"
+                // removePackageBtn.hidden = isNew
+
+                addBenefitBtn.type = "button"
+                submitButton.type = "submit"
+
+                addBenefitBtn.innerText = "Add benefit"
+                removePackageBtn.innerText = "Dismiss Section"
+                submitButton.innerText = "Create Package"
+
+                pkg?.benefits.map(b => {
+                    addBenefitField(benefitcontainer, b)
+                })
+
+                addBenefitBtn.addEventListener('click', () => addBenefitField(benefitcontainer, undefined))
+                addBenefitField(benefitcontainer, undefined)
+                removePackageBtn.addEventListener('click', () => {
+                    const canContinue = packageName.value.length < 2 || packagePrice.value.length < 2 || packageInterval.value.length < 2
+                    if (!canContinue) {
+                        if (confirm("Your inputs will be cleared")) {
+                            container.remove()
+                        }
+                    } else {
+                        container.remove()
+                    }
+                })
+
+
+                container.append( packageName, packagePrice, packageInterval, addBenefitBtn, removePackageBtn, packageHiddenId)
+                container.append(benefitInfoField,benefitcontainer)
+                container.append(submitButton)
+
+                container.addEventListener("submit", handleSubmitNewPackage)
+
+
+                document.getElementById('packagesContainer').append(container)
+            }
+
+            async function handleSubmitNewPackage(event) {
+                event.preventDefault()
+
+
+
+                const formData = buildFormData(event.target);
+                const formElements = event.target.elements;
+                try {
+                    for (let i = 0; i < formElements.length; i++) {
+                        formElements[i].disabled = true;
+                    }
+                    const response = await fetch(`/api/packages${formData?.packageId ? `/${formData?.packageId}` : ""}`, {
+                        method: `${formData?.packageId ? `PUT` : "POST"}`,
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ packages: formData })
+                    })
+
+                    if (!response.ok) {
+                        alert(response.errors)
+                    }
+                    const data = (await response.json()).data
+                } catch (error) {
+                    console.log("🚀 ~ handleSubmitNewPackage ~ error:", error)
+
+                } finally {
+                    for (let i = 0; i < formElements.length; i++) {
+                        formElements[i].disabled = false;
+                    }
+                }
+
+            }
+
+            function addBenefitField(container, benefit) {
+                const benefitContainer = document.createElement("div")
+                const input = document.createElement('input')
+                const isAvailable = document.createElement('input')
+                const addMoreBtn = document.createElement('button')
+                const removeBtn = document.createElement('button')
+
+
+                input.name = "benefits"
+                input.value = benefit?.name || ""
+
+                isAvailable.name = "isAvailable"
+                isAvailable.checked = !!benefit?.isAvailable || false
+                isAvailable.className = "p-2 mx-3"
+                isAvailable.type = "checkbox"
+
+                benefitContainer.className = "p-2"
+                input.placeholder = "Write something interesting..."
+                input.className = "p-2 mr-2"
+                addMoreBtn.className = "p-2 border bg-gray-500 rounded-md text-white"
+                removeBtn.className = "p-2 border bg-gray-500 rounded-md text-white mr-2"
+
+
+                addMoreBtn.innerText = "Add"
+                removeBtn.innerText = "Remove"
+
+                addMoreBtn.type = "button"
+                addMoreBtn.hidden = true
+                removeBtn.type = "button"
+
+
+                addMoreBtn.addEventListener('click', () => addBenefitField(benefitContainer))
+                removeBtn.addEventListener('click', () => {
+                    if (input.value.length > 2) {
+                        if (confirm("Your input will be cleared")) {
+                            benefitContainer.remove()
+                        }
+                    } else {
+                        benefitContainer.remove()
+                    }
+                })
+
+
+                benefitContainer.append(isAvailable, input, addMoreBtn, removeBtn)
+
+                container.append(benefitContainer)
+            }
+
+            const routers = document.querySelectorAll(".router")
+            const path = (new URL(window.location)).pathname
+
+            routers.forEach(el => el.addEventListener("click", handleRouting), false)
+
+            function handleRouting($this) {
+                const url = $this.target.dataset.url
+                window.history.pushState(url, undefined, `/${url}`)
+                document.querySelectorAll(`.sidebar-content`).forEach(el => el.classList.add("hidden"))
+                document.querySelector(`.${url.replaceAll("/", "")}`).classList.remove("hidden")
+            }
+
+            getPackages()
+
+
+
+            function getPackages() {
+                fetch("/api/packages")
+                    .then(e => e.json())
+                    .then(async ({ data }) => {
+                        // console.log(data);
+
+
+                        const resq = await fetch("/api/packages/list")
+                        AvailablePackages = (await resq.json()).data
+                        // console.log("🚀 ~ .then ~ AvailablePackages:", AvailablePackages)
+
+                        // AvailablePackages = {
+                        //     allowedPackages: data.allowedPackages,
+                        //     allowedIntervals: data.allowedIntervals
+                        // }
+
+                        let options = ``
+                        for (const pkg of AvailablePackages.allowedPackages) {
+                            options += `<option value='${pkg.name}'>${pkg.name}</option>`
+                        }
+
+                        const package = document.getElementById("subscriptionPlan")
+                        package.innerHTML = options
+
+
+                        for (const pkg of data.pkgs) {
+                            addNewPackageField(pkg)
+                        }
+
+                        // package.addEventListener("change", (e)=>getPackagePoints(e.target.value), false)
+
+                    })
+            }
+            async function updatePackage(data) {
+                try {
+                    const response = await fetch("/api/packages", {
+                        method: "PUT",
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+
+                    const data = await response.json()
+                    console.log(data);
+
+                } catch (error) {
+                    console.log("🚀 ~ updatePackage ~ error:", error)
+
+                }
+
+            }
+
+            async function createPackage(data) {
+                try {
+                    const response = await fetch("/api/packages", {
+                        method: "PUT",
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+
+                    const data = await response.json()
+                    console.log(data);
+
+                } catch (error) {
+                    console.log("🚀 ~ updatePackage ~ error:", error)
+
+                }
+
+            }
 
                 const fetchUsers = async () => {
                     try {
@@ -1849,7 +2224,7 @@
         <script>
             const sidebarLinks = document.querySelectorAll('.cursor-pointer');
             const sections = document.querySelectorAll(
-                '#manageAdminSection, #manageAvatarSection, #manageUsersSection, #manageProjectsSection, #toggleVisabilitySection, #manageSubmitsAndPricingSection, #changeAdminPasswordSection, #adminListSection'
+                '#manageAdminSection, #manageAvatarSection, #managePackageAndPricingSection, #manageUsersSection, #manageProjectsSection, #toggleVisabilitySection, #manageSubmitsAndPricingSection, #changeAdminPasswordSection, #adminListSection'
             );
 
             // Function to hide all sections
@@ -2091,5 +2466,7 @@
 
             populateAvatars();
         </script>
+
+        <!-- <script src="./js/create-avatar.js"></script> -->
     </body>
 </html>
